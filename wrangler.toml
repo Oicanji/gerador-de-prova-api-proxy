@@ -1,0 +1,7 @@
+name = "gerador-prova-api"
+main = "src/index.js"
+compatibility_date = "2024-08-01"
+
+[vars]
+BACKEND_ORIGIN = "https://gerador-de-prova-backend.onrender.com"
+CORS_ORIGIN = "https://oicanji.github.io"
