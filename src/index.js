@@ -40,6 +40,14 @@ export default {
 
     const headers = new Headers(request.headers);
     headers.delete("host");
+    const apiKey = request.headers.get("X-API-Key") || request.headers.get("x-api-key");
+    if (apiKey) {
+      headers.set("X-API-Key", apiKey);
+    }
+    const auth = request.headers.get("Authorization");
+    if (auth) {
+      headers.set("Authorization", auth);
+    }
 
     const init = {
       method: request.method,
