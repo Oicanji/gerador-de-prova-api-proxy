@@ -1,7 +1,7 @@
 const ALLOWED_PREFIXES = ["/api/v1/"];
 
 function isAllowedPath(pathname) {
-  if (pathname === "/health" || pathname === "/heath") {
+  if (pathname === "/health" || pathname === "/health/backend" || pathname === "/heath") {
     return true;
   }
   return ALLOWED_PREFIXES.some((p) => pathname.startsWith(p));
@@ -32,11 +32,20 @@ export default {
       });
     }
 
+    if (url.pathname === "/health" && request.method === "GET") {
+      return new Response(JSON.stringify({ status: "ok", layer: "worker" }), {
+        status: 200,
+        headers: { ...cors, "Content-Type": "application/json" },
+      });
+    }
+
     const backend = (env.BACKEND_ORIGIN || "https://gerador-de-prova-backend.onrender.com").replace(
       /\/$/,
       ""
     );
-    const target = `${backend}${url.pathname}${url.search}`;
+    const backendPath =
+      url.pathname === "/health/backend" ? "/health" : `${url.pathname}${url.search}`;
+    const target = `${backend}${backendPath}`;
 
     const headers = new Headers(request.headers);
     headers.delete("host");
