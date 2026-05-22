@@ -11,7 +11,7 @@ function corsHeaders(origin) {
   return {
     "Access-Control-Allow-Origin": origin,
     "Access-Control-Allow-Headers": "Content-Type, X-API-Key, Authorization",
-    "Access-Control-Allow-Methods": "GET, POST, DELETE, OPTIONS",
+    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
   };
 }
 
